@@ -21,6 +21,8 @@ type SysContextType = {
 
 type SysContextProviderProps = {
  children: ReactNode;
+};
+
 export const SysContext = createContext<SysContextType>({
  showButtons: "none",
  isModalOpen: false,
