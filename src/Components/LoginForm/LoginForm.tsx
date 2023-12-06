@@ -1,23 +1,37 @@
 import React, { useState } from "react";
+import { useAuth } from "../../Context/AuthContext.tsx";
+import { useHistory } from "react-router-dom";
 
-export const LoginModal = () => {
-  const [username, setUsername] = useState("");
+export const LoginModal: React.FC = () => {
+  const [login, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
+  const { setUserRole } = useAuth(); // Dostęp do setUserRole z Context
+
+  const Rediirect = (role: string) =>{
+    console.log("Wykonalo sie");
+    return redirect(`/${role}page`);
+  }
+
   const handleLogin = async () => {
     try {
-      const response = await fetch("http://localhost:8080/login", {  // Update the URL
+      const loginData = { login, password };
+
+      const response = await fetch("http://localhost:8080/login", {
         method: "POST",
         headers: {
-          "accept" : "*/*",
+          accept: "*/*",
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify(loginData),
       });
 
       if (response.ok) {
-        console.log("Poprawne Dane");
+        const responseData: { rola: string } = await response.json();
+        setUserRole(responseData.rola); // Ustawienie roli za pomocą Context
+        console.log("Stan użytkownika ustawiony poprawnie:", responseData.rola);
+        Rediirect(responseData.rola);
       } else {
         setError("Niepoprawne dane logowania");
       }
@@ -27,6 +41,7 @@ export const LoginModal = () => {
     }
   };
 
+
   return (
     <div>
       <div>
@@ -35,7 +50,7 @@ export const LoginModal = () => {
           Username:
           <input
             type="text"
-            value={username}
+            value={login}
             onChange={(e) => setUsername(e.target.value)}
           />
         </label>
