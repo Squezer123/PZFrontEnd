@@ -7,9 +7,10 @@ export const LoginModal = () => {
 
   const handleLogin = async () => {
     try {
-      const response = await fetch("/api/login", {
+      const response = await fetch("http://localhost:8080/login", {  // Update the URL
         method: "POST",
         headers: {
+          "accept" : "*/*",
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ username, password }),
@@ -53,4 +54,4 @@ export const LoginModal = () => {
       </div>
     </div>
   );
-}
+};
