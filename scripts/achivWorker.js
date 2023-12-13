@@ -6,7 +6,7 @@ fetch(url, {
   method: 'GET',
   headers: {
     'Accept': '*/*',
-    'Authorization': `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQUkFDT1dOSUsiLCJleHAiOjE5MTg1MDAzNzZ9.BSDyxIcv_NeLx-8lyj7K1OhD3d50A_s6bKrMK3rxGvs`
+    'Authorization': `Bearer ${token}`
   }
 })
   .then(response => {
