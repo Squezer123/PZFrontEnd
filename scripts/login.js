@@ -1,48 +1,43 @@
-// script.js
 
-function setCookie(name, value, minutes) {
-    var expires = '';
-    if (minutes) {
-      var date = new Date();
-      date.setTime(date.getTime() + (minutes * 60 * 1000));
-      expires = '; expires=' + date.toUTCString();
-    }
-    document.cookie = name + '=' + value + expires + '; path=/';
-  }
 
-function redirection(role){
+function redirection(role,id){
     window.location.href = `http://127.0.0.1:5500/${role}Page.html`;
-    setCookie('userRole', role, 5);
+    
 }
 
 
 function validateLogin() {
-    var username = document.getElementById('username').value;
-    var password = document.getElementById('password').value;
-  
-    fetch('users.json')
-      .then(response => response.json())
-      .then(data => {
-        var user = data.users.find(user => user.username === username && user.password === password);
-        let role = user.role;
+  var login = document.getElementById('username').value;
+  var password = document.getElementById('password').value;
 
-        if (user) {
-            switch(role){
-                case "admin":
-                    redirection(role)
-                    break;
-                case "user":
-                    redirection(role)
-                    break;
-                case "supervisor":
-                    redirection(role);
-                    break;
-            }
-          
-        } else {
+  var data = {
+      login: login,
+      password: password
+  };
+
+  fetch('http://localhost:8080/login', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+  })
+  .then(response => response.json())
+  .then(data => {
+      var role = data.rola.toLowerCase();
+      console.log(role)
+      if(role === "pracownik");
+      {
+        console.log(role)
+        pracownikSetup(data);
+      }
+
+      
+      if (role) {
+          redirection(role);
+      } else {
           alert('Błąd logowania. Spróbuj ponownie.');
-        }
-      })
-      .catch(error => console.error('Błąd ładowania danych z pliku JSON:', error));
-  }
-  
+      }
+  })
+  .catch(error => console.error('Błąd ładowania danych z serwera:', error));
+}
