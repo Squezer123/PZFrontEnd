@@ -1,0 +1,22 @@
+@import url(./header.css);
+@import url(./loginContainer.css);
+
+*{
+    margin: 0;
+    padding: 0;
+    background: #333;
+    color: white;
+}
+
+body {
+    height: 100%;
+    margin: 0;
+}
+
+main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 100px);
+    
+}
