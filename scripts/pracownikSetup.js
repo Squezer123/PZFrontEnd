@@ -2,6 +2,8 @@ const worker = new Worker("../scripts/achivWorker.js");
 var dataFromWorker;
 const url = 'http://localhost:8080/Osiagniecia';
 const token = cookies.getCookie('token');
+var globalAchivData = [];
+
 
 worker.addEventListener('message', (event) => {
     const result = event.data.result;
@@ -9,7 +11,8 @@ worker.addEventListener('message', (event) => {
     if (result === 'success') {
         dataFromWorker = event.data.data;
         console.log('Success:', dataFromWorker);
-        createOsiagniecia(dataFromWorker); // Call the function with the data
+        createOsiagniecia(dataFromWorker);
+        createOsiagniecia(dataFromWorker);
     } else {
         const error = event.data.error;
         console.error('Error:', error);
@@ -22,6 +25,7 @@ let createOsiagniecia = (data) => {
     let container = document.getElementsByClassName("zgloszenia")[0];
 
     data.forEach(element => {
-        creator.osiagniecie(element);
+        document.querySelector('.workplace').appendChild(creator.osiagniecie(element));
     });
 }
+

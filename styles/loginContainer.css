@@ -22,7 +22,7 @@
     color: black;
   }
 
-  button {
+  .loginContainer button {
     margin-left: 35px;
     background-color: #012404;
     color: #fff;

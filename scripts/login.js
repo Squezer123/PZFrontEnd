@@ -1,9 +1,4 @@
 
-
-function redirection(role,id){
-    window.location.href = `http://127.0.0.1:5500/${role}Page.html`;
-    
-}
 function pracownikSetup(data){
     cookies.setCookie('userRole', data.rola, 5);
     cookies.setCookie('token', data.token, 5);
@@ -15,6 +10,10 @@ function pracownikSetup(data){
         cookies.setCookie(`${element}`, pracownikInfo[element], 5);
         console.log(cookies.getCookie(element));
     });
+}
+function redirection(role){
+    if(role === "index") window.location.href = 'http://127.0.0.1:5500/index.html'
+    else window.location.href = `http://127.0.0.1:5500/${role}Page.html`;
 }
 
 
@@ -37,16 +36,14 @@ function validateLogin() {
   .then(response => response.json())
   .then(data => {
       var role = data.rola.toLowerCase();
-      console.log(role)
       if(role === "pracownik");
       {
-        console.log(role)
         pracownikSetup(data);
       }
 
       
       if (role) {
-          redirection(role);
+        redirection(role);
       } else {
           alert('Błąd logowania. Spróbuj ponownie.');
       }

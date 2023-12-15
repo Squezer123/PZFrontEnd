@@ -4,9 +4,12 @@ var creator = {
         newOsiagniecie.style.display = "flex";
         newOsiagniecie.style.alignItems = "center";
         let pola = [];
-        
+        globalAchivData.push(new Osiagniecie(element))
 
         for (let key in element) {
+            if(key === 'idOsiagniecia'){
+                continue;
+            }
             let value = element[key];
             let osiagniecieData = document.createElement("div");
             osiagniecieData.classList.add("osiagnieciapole")
@@ -19,6 +22,14 @@ var creator = {
             const sformatowanaData = `${dzien}.${miesiac}.${rok}`;
             value = sformatowanaData;
             }
+            if(key === 'podKategoriaNazwa'){
+                osiagniecieData.innerHTML = `Kategoria: ${value}`;
+                pola.push(osiagniecieData);
+                continue;
+            }
+            if(key === 'idWniosku'){
+                continue;
+            }
             
             
             if(key === "czyZatwierdzone" && value){
@@ -26,7 +37,7 @@ var creator = {
                 osiagniecieData.style.color = "green";
             }
             else if(key === "czyZatwierdzone" && !value){
-                osiagniecieData.innerHTML = `Odrzucone`;
+                osiagniecieData.innerHTML = `Niezatwierdzone`;
                 osiagniecieData.style.color = "red";
 
             }
@@ -39,7 +50,12 @@ var creator = {
             newOsiagniecie.appendChild(pole);
         })
         newOsiagniecie.classList.add('osiagniecie');
-
-        document.getElementsByClassName('zgloszenia')[0].appendChild(newOsiagniecie);
+        return newOsiagniecie;
     },
+
+    button(buttontxt){
+        let button = document.createElement("button");
+        button.innerHTML = buttontxt;
+        return button;
+    }
 }

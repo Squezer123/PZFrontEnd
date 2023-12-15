@@ -10,7 +10,6 @@ document.addEventListener("DOMContentLoaded", function () {
       logout(logOutButton);
       header.appendChild(logOutButton);
     }
-    
-    document.body.insertBefore(header, mainElement);
+    document.body.insertBefore(header, mainElement,);
   });
 
