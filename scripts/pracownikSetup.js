@@ -1,15 +1,27 @@
-function pracownikSetup(data){
-    cookies.setCookie('userRole', data.rola, 5);
-    cookies.setCookie('token', data.token, 5);
-    let pracownikInfo = data.pracownik;
-    let arr = ['imie','nazwisko','idPracownika'];
+const worker = new Worker("../scripts/achivWorker.js");
+var dataFromWorker;
+const url = 'http://localhost:8080/Osiagniecia';
+const token = cookies.getCookie('token');
 
-    arr.forEach(element => {
-        console.log(pracownikInfo[element]);
-        cookies.setCookie(`${element}`, pracownikInfo[element], 5);
-        console.log(cookies.getCookie(element));
+worker.addEventListener('message', (event) => {
+    const result = event.data.result;
+
+    if (result === 'success') {
+        dataFromWorker = event.data.data;
+        console.log('Success:', dataFromWorker);
+        createOsiagniecia(dataFromWorker); // Call the function with the data
+    } else {
+        const error = event.data.error;
+        console.error('Error:', error);
+    }
+});
+
+worker.postMessage({ url, token });
+
+let createOsiagniecia = (data) => {
+    let container = document.getElementsByClassName("zgloszenia")[0];
+
+    data.forEach(element => {
+        creator.osiagniecie(element);
     });
 }
-
-
-

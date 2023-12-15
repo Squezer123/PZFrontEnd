@@ -2,3 +2,23 @@
 @import url(./header.css);
 
 
+.zgloszenia{
+    display: flex;
+    flex-direction: column;
+}
+
+.osiagnieciapole{
+    margin: 1rem;
+}
+
+.imie{
+    font-size: 1.5rem;
+    padding: 50px;
+    padding-left: 0;
+}
+
+.osiagniecie{
+    display: flex;
+    align-items: center;
+    border: 1px solid white;
+}

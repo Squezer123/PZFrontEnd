@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
     logOutButton.classList.add("logout");
     logOutButton.innerHTML="Logout";
     
-    if(cookies.checkCookies("useRole")){
+    if(cookies.checkCookies("userRole")){
       logout(logOutButton);
       header.appendChild(logOutButton);
     }
