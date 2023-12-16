@@ -1,13 +1,13 @@
 
 function pracownikSetup(data){
-    cookies.setCookie('userRole', data.rola, 10);
-    cookies.setCookie('token', data.token, 10);
+    cookies.setCookie('userRole', data.rola, 1000);
+    cookies.setCookie('token', data.token, 1000);
     let pracownikInfo = data.pracownik;
     if(data.rola !== 'ADMIN'){
         let arr = ['imie','nazwisko','idPracownika'];
 
         arr.forEach(element => {
-            cookies.setCookie(`${element}`, pracownikInfo[element], 5);
+            cookies.setCookie(`${element}`, pracownikInfo[element], 1000);
         });
     }
     

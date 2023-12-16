@@ -70,3 +70,14 @@ main{
     margin-top: 20px;
     font-size: 16px;
 }
+
+.uzytkownik{
+    min-width: 100%;
+    border: 1px solid white;
+    background: #4b4b4b;
+    margin: 5px;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+}

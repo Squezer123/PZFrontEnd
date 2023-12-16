@@ -2,62 +2,36 @@ let buttons = document.getElementsByClassName('navButton');
 let workplace = document.querySelector(".workplace");
 let temporaryAchiv = [];
 let title = document.querySelector(".title");
+let modal = document.querySelector(".modal");
+let modalContainer = document.querySelector(".modalContainer");
 
 
-buttons[0].addEventListener('click', ()=> {
-    title.innerHTML = "Zarządzanie zgłoszeniami";
+buttons[0].addEventListener('click',async ()=> {
+    let uzytkownicy = await db.getData('Uzytkownicy');
+    uzytkownicy.forEach(element => {
+        if(element.imiePracownika !== null){
+            let uzytkownik = document.createElement("div");
+            uzytkownik.innerHTML = `${element.imiePracownika} ${element.nazwiskoPracownika}`;
+            uzytkownik.classList.add('uzytkownik');
 
-    workplace.innerHTML = null;
-    
-    globalAchivData.forEach(element => {
-        if(element.zatwierdzone === false)
-        creator.osiagniecie(element);
+            uzytkownik.addEventListener('click', () => {
+                modalContainer.innerHTML = null;
+                modal.classList.add("open")
+                modalContainer.addEventListener("click", (e)=>{
+                    e.stopPropagation();
+                })
+                modal.addEventListener("click", ()=> {
+                    modal.classList.remove("open");
+                })
+                for(let key in element){
+                    let value = element[key];
+                    let tempElement = document.createElement("div");
+                    tempElement.innerHTML = `${key}: ${value}`;
+                    modalContainer.appendChild(tempElement);
+                }                
+            })
+            workplace.appendChild(uzytkownik)
+        }
     });
-
-
-    let buttonsContainer = document.createElement("div");
-    buttonsContainer.classList.add("buttonsContainer");
-    let addButton = creator.button('Dodaj');
-    let SendButton = creator.button('Wyslij');
-
-    addButton.addEventListener("click", () => {
-        let modal = document.querySelector(".modal");
-        let modalContainer = document.querySelector(".modalContainer");
-        modal.classList.add("open")
-        modalContainer.addEventListener("click", (e)=>{
-            e.stopPropagation();
-        })
-        modal.addEventListener("click", ()=> {
-            modal.classList.remove("open");
-        })
-    })
-    SendButton.addEventListener("click", () => {
-        sentAchiv(temporaryAchiv);
-        utils.redirection('pracownik');
-    })
-    buttonsContainer.appendChild(addButton);
-    buttonsContainer.appendChild(SendButton);
-    workplace.appendChild(buttonsContainer);
-
 })
-
-
-buttons[1].addEventListener('click',async ()=> {
-   
-    
-})
-
-try{
-    buttons[2].addEventListener('click', async ()=> {
-        workplace.innerHTML = null;
-        let podwladni = await db.getData('pracownicy_przelozonego')
-        podwladni.forEach(element => {
-            let helpDiv = document.createElement("div");
-            helpDiv.innerHTML = `${element.imie} ${element.nazwisko}`;
-            workplace.appendChild(helpDiv);
-        })
-    })   
-}catch(e){
-
-}
 

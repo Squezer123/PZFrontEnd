@@ -55,40 +55,6 @@ buttons[0].addEventListener('click', async ()=> {
     let addButton = creator.button('Dodaj');
     let SendButton = creator.button('Wyslij');
     let osArr = await db.getData('Osiagniecia');
-    osArr.forEach(element => {
-        if(element.czyZatwierdzone === false){
-            removeAllEventListeners(document.querySelector('.submitButton'));
-            document.querySelector('.submitButton').addEventListener('click',() => {modalHandlerEdit(currentOpen,true,temporaryAchiv);})
-            let toAdd = creator.osiagniecie(element);
-            toAdd.addEventListener('click',()=>{
-                
-                modal.classList.add("open")
-                modalContainer.addEventListener("click", (e)=>{
-                    e.stopPropagation();
-                })
-                modal.addEventListener("click", ()=> {
-                    modal.classList.remove("open");
-                })
-                
-                var orginalDate = new Date(element.data);
-                        var year = orginalDate.getFullYear();
-                        var month = ('0' + (orginalDate.getMonth() + 1)).slice(-2); 
-                        var day = ('0' + orginalDate.getDate()).slice(-2); 
-                        var hours = ('0' + orginalDate.getHours()).slice(-2); 
-                        var minutes = ('0' + orginalDate.getMinutes()).slice(-2);
-                        var formattedDate = year + '-' + month + '-' + day + 'T' + hours + ':' + minutes;
-                        console.log(orginalDate);
-                        document.getElementById('nazwa').value = element.nazwa;
-                        document.getElementById('iloscPunktow').value = element.iloscPunktow;
-                        document.getElementById('data').value = formattedDate;
-                        document.getElementById('podKategoria').value = element.podKategoriaNazwa;
-                        currentOpen = element;
-            })
-            
-            workplace.appendChild(toAdd);
-        }
-       
-    });
 
     addButton.addEventListener("click", () => {
         document.getElementById('czyZatwierdzone').style.display = 'none';
@@ -201,11 +167,26 @@ buttons[1].addEventListener('click',async ()=> {
         brakujacePunktyDiv.innerHTML = `Liczba puntków potrzebna do wyższej oceny: <span style="font-weight:bold;">${brakujacePunkty}</span>`
         statystyka.appendChild(brakujacePunktyDiv);
     }
-    if(przelozony.imie !== undefined){
+    if(przelozony.imie){
+        
         let przelozonyDiv = document.createElement("div");
         przelozonyDiv.innerHTML = `Przełożony: <span style="font-weight:bold;">${przelozony.imie} ${przelozony.nazwisko}</span>`;
         statystyka.appendChild(przelozonyDiv);
     }
+
+    let historiaOcenData = await db.getData('Oceny');
+    console.log(historiaOcenData);
+    let historiaOcen = document.createElement("div");
+    historiaOcen.innerHTML = `Historia Ocen:`;
+    
+    historiaOcenData.forEach(element => {
+        historiaOcenPom = document.createElement("div");
+        let rok = new Date(element.data).getFullYear();
+        let nazwa = element.nazwa;
+        historiaOcenPom.innerHTML = `<span style="font-weight:bold;">${rok}: ${nazwa}</span>`;
+        historiaOcen.appendChild(historiaOcenPom);
+    })
+    statystyka.appendChild(historiaOcen);
 
    
     workplace.appendChild(statystyka);
@@ -216,6 +197,7 @@ try{
     buttons[2].addEventListener('click', async ()=> {
         workplace.innerHTML = null;
         title.innerHTML = "Podwladny";
+        workplace.style.overflowY = `scroll`;
         document.querySelector('.submitButton').innerHTML = "Zmien";
         removeAllEventListeners(document.querySelector('.submitButton'));
         document.querySelector('.submitButton').addEventListener('click',() => {modalHandlerEdit(currentOpen);podwaldniLoad();})

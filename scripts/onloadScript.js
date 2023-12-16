@@ -7,7 +7,6 @@ document.addEventListener("DOMContentLoaded", function () {
     logOutButton.innerHTML="Logout";
     console.log(cookies.checkCookies("userRole"));
     if(cookies.checkCookies("userRole")){
-      console.log("wykonało się");
       logout(logOutButton);
       header.appendChild(logOutButton);
     }
