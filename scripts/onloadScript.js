@@ -5,8 +5,9 @@ document.addEventListener("DOMContentLoaded", function () {
     var logOutButton = document.createElement("button")
     logOutButton.classList.add("logout");
     logOutButton.innerHTML="Logout";
-    
+    console.log(cookies.checkCookies("userRole"));
     if(cookies.checkCookies("userRole")){
+      console.log("wykonało się");
       logout(logOutButton);
       header.appendChild(logOutButton);
     }

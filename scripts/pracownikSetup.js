@@ -12,7 +12,6 @@ worker.addEventListener('message', (event) => {
         dataFromWorker = event.data.data;
         console.log('Success:', dataFromWorker);
         createOsiagniecia(dataFromWorker);
-        createOsiagniecia(dataFromWorker);
     } else {
         const error = event.data.error;
         console.error('Error:', error);

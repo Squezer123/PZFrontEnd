@@ -3,28 +3,6 @@ let workplace = document.querySelector(".workplace");
 let temporaryAchiv = [];
 let title = document.querySelector(".title");
 
-let sentAchiv = (achiv) =>{
-        
-        let token = cookies.getCookie('token');
-        achiv.forEach(element => {
-            console.log(JSON.stringify(element));
-            fetch('http://localhost:8080/Osiagniecie', {
-                method: 'POST',
-                headers: {
-                  'Accept': '*/*',
-                  'Authorization': `Bearer ${token}`,
-                  'Content-Type': 'application/json' 
-                },
-                body: JSON.stringify(element)
-              })
-                .then(response => {
-                  if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                  }
-                  return response.json();
-                })
-        }); 
-}
 
 buttons[0].addEventListener('click', ()=> {
     title.innerHTML = "Zarządzanie zgłoszeniami";
@@ -36,6 +14,9 @@ buttons[0].addEventListener('click', ()=> {
         creator.osiagniecie(element);
     });
 
+
+    let buttonsContainer = document.createElement("div");
+    buttonsContainer.classList.add("buttonsContainer");
     let addButton = creator.button('Dodaj');
     let SendButton = creator.button('Wyslij');
 
@@ -52,18 +33,31 @@ buttons[0].addEventListener('click', ()=> {
     })
     SendButton.addEventListener("click", () => {
         sentAchiv(temporaryAchiv);
+        utils.redirection('pracownik');
     })
-    workplace.appendChild(addButton);
-    workplace.appendChild(SendButton);
+    buttonsContainer.appendChild(addButton);
+    buttonsContainer.appendChild(SendButton);
+    workplace.appendChild(buttonsContainer);
 
 })
 
 
-buttons[1].addEventListener('click', ()=> {
-    title.innerHTML = "Statystyka";
-    workplace.style.overflowY = "hidden";
-    workplace.innerHTML = null;
+buttons[1].addEventListener('click',async ()=> {
+   
     
 })
 
+try{
+    buttons[2].addEventListener('click', async ()=> {
+        workplace.innerHTML = null;
+        let podwladni = await db.getData('pracownicy_przelozonego')
+        podwladni.forEach(element => {
+            let helpDiv = document.createElement("div");
+            helpDiv.innerHTML = `${element.imie} ${element.nazwisko}`;
+            workplace.appendChild(helpDiv);
+        })
+    })   
+}catch(e){
+
+}
 

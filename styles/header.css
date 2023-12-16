@@ -15,4 +15,11 @@ header button{
     position: absolute;
     right: 50px;
     border: 1px solid white;
+    width: 75px;
+    height: 35px;
+    background-color: #012404;
+    color: #fff;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
 }

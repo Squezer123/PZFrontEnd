@@ -3,29 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./styles/main.css">
+  <link rel="stylesheet" href="./styles/pracownik.css">
+  
   <title>Document</title>
 </head>
 <body>
-  <main id="main">
-    <div class="rola"></div>
-    <img src="https://uploads.dailydot.com/2018/10/olli-the-polite-cat.jpg?q=65&auto=format&w=2270&ar=2:1&fit=crop" alt="kot" style="height: 100px; width: 200px;">
+  <main id="main" style="display: flex; flex-direction: column;">
+    <div class="imie">ADMIN</div> 
+    <div class="nav">
+      <button class="navButton">Osiagniecia</button>
+      <button class="navButton">Konta</button>
+    </div>
+    <div class="workplace">
+    </div>
+    <button class="powrot" onclick="utils.redirection('admin')">Powrót</button>
+
   </main>
-  <script src="./scripts/cookies.js"></script>
-  <script>
-
-    var userRole = cookies.getCookie('userRole');
-
-    var rolaElement = document.querySelector('.rola');
-    if (userRole) {
-      rolaElement.textContent = 'Rola: ' + userRole;
-    } else {
-      rolaElement.textContent = 'Brak roli';
-    }
-    
-  </script>
-  <script src="./scripts/utils.js"></script>
-  <script src="scripts/logout.js"></script>
+  
   <script src="scripts/onloadScript.js"></script>
+  <script src="scripts/elementCreator.js"></script>
+  <script src="scripts/cookies.js"></script>
+  <script src="scripts/dataBase.js"></script>
+  <script src="./scripts/utils.js"></script>
+  <script src="scripts/workplacePracownik.js"></script>
+  <script src="scripts/modal.js"></script>
+  <script src="scripts/logout.js"></script>
 </body>
 </html>

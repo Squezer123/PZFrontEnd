@@ -17,6 +17,7 @@
 }
 
 .workplace button {
+    display: inline-block;
     width: 75px;
     height: 35px;
     background-color: #012404;
@@ -25,4 +26,20 @@
     border-radius: 8px;
     cursor: pointer;
     font-size: 16px;
+}
+
+.podwladny{
+    background-color: #434343;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid white;
+    margin: 10px;
+    border-radius: 8px;
+    min-width: 100%;
+    padding: 5px;
+    cursor: pointer;
+}
+.podwladny:hover{
+    background-color: #515151;
 }

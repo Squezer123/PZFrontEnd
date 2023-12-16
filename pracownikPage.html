@@ -8,7 +8,7 @@
 </head>
 <body>
   <main id="main">
-    <div class="imie"></div> <br>
+    <div class="imie"></div> 
     <div class="nav">
       <button class="navButton">Zarządzanie zgłoszeniami</button>
       <button class="navButton">Statystyka</button>
@@ -16,9 +16,8 @@
     </div>
     <div class="title">Zgłoszenia</div>
     <div class="workplace">
-      <button class="dodaj">Dodaj</button>
     </div>
-    <button onclick="utils.redirection('pracownik')">Powrót</button>
+    <button class="powrot" onclick="utils.redirection('pracownik')">Powrót</button>
 
   </main>
   <div class="modal">
@@ -33,6 +32,13 @@
         <label for="data">Data:</label>
         <input type="datetime-local" id="data" required>
     
+        <label for="czyZatwierdzone">Czy Zatwierdzone:</label>
+        <select id="czyZatwierdzone" required>
+          <option value=true>Tak</option>
+          <option value=false>Nie</option>
+
+        </select>
+
         <label for="podKategoria">Podkategoria:</label>
         <select id="podKategoria" required>
           <option value="Uzyskanie tytułu profesora">Uzyskanie tytułu profesora</option>
@@ -42,7 +48,7 @@
           <option value="Patenty na wynalazki, prawa ochronne na wzory użytkowe i wyłączne prawa hodowców do odmian roślin">Patenty na wynalazki, prawa ochronne na wzory użytkowe i wyłączne prawa hodowców do odmian roślin</option>
         </select>
         
-        <button type="button" class="submitButton" onclick="modalHandler()">Dodaj</button>
+        <button type="button" class="submitButton">Dodaj</button>
       </form>
     </div>
   </div>
@@ -54,7 +60,7 @@
   <script src="scripts/pracownikSetup.js"></script>
   <script src="/scripts/osiagniecie.js"></script>
   <script src="./scripts/utils.js"></script>
-  <script src="scripts/workplace.js"></script>
+  <script src="scripts/workplacePracownik.js"></script>
   <script src="scripts/modal.js"></script>
   <script src="scripts/logout.js"></script>
 </body>
