@@ -22,7 +22,30 @@
   </main>
   <div class="modal">
     <div class="modalContainer">
+      <form class="achievementForm">
+
+        <label for="Imie">Imie:</label>
+        <input type="text" id="Imie" required>
+
+        <label for="Nazwiko">Nazwisko:</label>
+        <input type="text" id="Nazwisko" required>
+    
+        <label for="login">Login:</label>
+        <input type="text" id="login" required>
+    
+        <label for="czyZatwierdzone">Haslo:</label>
+        <input type="text" id="czyZatwierdzone" required>
+
+        <label for="podKategoria">Rola:</label>
+        <select id="podKategoria" required>
+          <option value="ADMIN">ADMIN</option>
+          <option value="PRACOWNIK">PRACOWNIK</option>
+        </select>
+        
+        <button type="button" class="submitButton">Dodaj</button>
+      </form>
     </div>
+    
   </div>
   
   <script src="scripts/onloadScript.js"></script>

@@ -48,4 +48,32 @@ var db = {
           return response.json();
         });
       },
+      PostData(type,body) {
+        let token = cookies.getCookie('token');
+        return fetch(`http://localhost:8080/${type}`, {
+          method: 'Post',
+          headers: {
+            'Accept': '*/*',
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(body)
+        })
+        .then(response => {
+          return response.json();
+        });
+      },
+      DeleteData(type) {
+        let token = cookies.getCookie('token');
+        return fetch(`http://localhost:8080/${type}`, {
+          method: 'Delete',
+          headers: {
+            'Accept': '*/*',
+            'Authorization': `Bearer ${token}`,
+          },
+        })
+        .then(response => {
+          return response.json();
+        });
+      },
 }
