@@ -22,6 +22,7 @@ let sentAchiv = (achiv) =>{
         
         let token = cookies.getCookie('token');
         achiv.forEach(element => {
+            element.idWniosku = 251;
             console.log(JSON.stringify(element));
             fetch('http://localhost:8080/Osiagniecie', {
                 method: 'POST',
@@ -101,7 +102,7 @@ buttons[1].addEventListener('click',async ()=> {
     
 
     let obecnyWniosek = () => {
-        let obecnyRok = new Date().getFullYear();
+        let obecnyRok = 2023;
         let wniosek;
         wnioski.forEach((element) => {
             const data = new Date(element.dataKoncowa).getFullYear();
